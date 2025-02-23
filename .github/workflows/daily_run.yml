@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -55,7 +55,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         
       - name: Upload HTML File as Artifact
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact@v3  # Use the stable v3 version
         with:
           name: india-news-html
           path: docs/
