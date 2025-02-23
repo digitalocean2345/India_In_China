@@ -102,12 +102,12 @@ def publish_articles(articles):
     filename = f"india_news_{today}.html"
 
     # Define the path to the docs directory
-    docs_dir = "docs"
+    docs_dir = os.path.join(os.getcwd(), "docs")  # Ensure full path
 
     
     # Ensure the 'docs' directory exists
     if not os.path.exists(docs_dir):
-        os.makedirs(docs_dir)
+        os.makedirs(docs_dir, exist_ok=True) #Ensure directory creation
     
     # Define the full file path within the docs directory
     file_path = os.path.join(docs_dir, filename)
