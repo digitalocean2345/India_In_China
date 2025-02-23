@@ -82,7 +82,7 @@ def publish_articles(articles):
     # Get current date
     today = datetime.today().strftime('%Y-%m-%d')
     
-    html_content = "<html><head><title>India News "+{today}+"</title></head><body><h1>India-related Articles + {today}</h1>"
+    html_content = "<html><head><title>India News "+{today}+"</title></head><body><h1>India-related Articles"+{today}+"</h1>"
     for article in articles:
         title = article['title']
         link = article['link']
