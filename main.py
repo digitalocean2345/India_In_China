@@ -1,5 +1,10 @@
-!pip install googletrans==3.1.0a0
-!pip install requests beautifulsoup4
+#!pip install googletrans==3.1.0a0
+#!pip install requests beautifulsoup4
+
+import subprocess
+subprocess.run(["pip", "install", "googletrans==3.1.0a0"])
+import subprocess
+subprocess.run(["pip", "install", "requests", "beautifulsoup4"])
 
 from translation_utils import translate_article  # Import from translation_utils.py
 
@@ -12,7 +17,7 @@ import os # Import the os module
 
 
 # Replace with your own credentials
-API_KEY = os.environ.get('API_KEY')
+API_KEY = os.getenv('API_KEY')
 CSE_ID = os.environ.get('CSE_ID')
 
 # Function to fetch results from CSE API
