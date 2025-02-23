@@ -54,8 +54,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         
-      - name: Upload HTML File as Artifact
-        uses: actions/upload-artifact@v3  # Use the stable v3 version
-        with:
-          name: india-news-html
-          path: docs/
+      
