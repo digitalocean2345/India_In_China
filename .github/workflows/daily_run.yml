@@ -3,13 +3,16 @@ name: Daily News Update
 on:
   schedule:
     - cron: '0 8 * * *'  # Run daily at 08:00 UTC
+  push:
+    branches:
+      - main #runs when the code is pushed to the main branch
   workflow_dispatch: # Added to be able to manually trigger the workflow
 
 jobs:
-  run_python_script:
+  run_script:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v4
