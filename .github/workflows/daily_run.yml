@@ -55,7 +55,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         
       - name: Upload HTML File as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: india-news-html
           path: docs/
