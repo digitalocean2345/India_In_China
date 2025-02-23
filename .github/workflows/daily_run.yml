@@ -1,0 +1,26 @@
+name: Daily News Update
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Run daily at 08:00 UTC
+  workflow_dispatch: # Added to be able to manually trigger the workflow
+
+jobs:
+  run_python_script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Or your preferred Python version
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run script
+        run: python main.py
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          CSE_ID: ${{ secrets.CSE_ID }}
