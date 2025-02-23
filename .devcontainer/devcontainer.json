@@ -1,0 +1,8 @@
+{
+    "name": "Codespace",  //Change this to the name of your project
+    "features": {},
+    "containerEnv": {
+      "API_KEY": "${API_KEY}",
+      "CSE_ID": "${CSE_ID}"
+    }
+}
