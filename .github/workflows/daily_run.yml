@@ -5,8 +5,8 @@ on:
     - cron: '0 8 * * *'  # Run daily at 08:00 UTC
   push:
     branches:
-      - main #runs when the code is pushed to the main branch
-  workflow_dispatch: # Added to be able to manually trigger the workflow
+      - main # Runs when the code is pushed to the main branch
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   run_script:
@@ -19,42 +19,42 @@ jobs:
         run: |
             git config --global user.name "GitHub Actions"
             git config --global user.email "actions@github.com"    
-      
-      - name: Commit and Push Changes
-        run: |
-          git add docs/
-          git commit -m "Auto-generated news file"
-          git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --force
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'  # Or your preferred Python version
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Check working directory
+      - name: Check working directory (debugging)
         run: pwd && ls -la
 
       - name: List docs directory before running script
         run: |
           ls -l docs
-          mkdir -p docs
-      
-      
+          mkdir -p docs  # Ensure the docs directory exists
+
       - name: Run script
         run: python main.py
         env:
           API_KEY: ${{ secrets.API_KEY }}
           CSE_ID: ${{ secrets.CSE_ID }}
-      
+
       - name: List docs directory after running script
+        run: ls -l docs
+
+      - name: Check for file changes (debugging)
+        run: git status
+
+      - name: Commit and Push Changes
         run: |
-          ls -l docs
-        
-        
-      
+          git add docs/
+          git status  # Ensure there are changes
+          git commit -m "Auto-generated news file for $(date +%F)" || echo "No changes to commit"
+          git push https://github.com/${{ github.repository }} HEAD:${{ github.ref }} --force
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
