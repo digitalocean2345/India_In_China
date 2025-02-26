@@ -201,7 +201,7 @@ start_date = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 query = "印度"
 
 # Fetch articles
-articles = fetch_articles(query, start_date, end_date, num_results=30)
+articles = fetch_articles(query, start_date, end_date, num_results=90)
 print(len(articles))
 
 # Publish to a webpage
