@@ -29,7 +29,7 @@ def fetch_articles(query, start_date, end_date, num_results):
 
     # Format the date range
     date_range = f"{start_date}..{end_date}"  # Date format is YYYY-MM-DD..YYYY-MM-DD
-
+    print(date_range)
     while len(results) < num_results:
         params = {
                 'key': API_KEY,
@@ -49,9 +49,7 @@ def fetch_articles(query, start_date, end_date, num_results):
 
         if 'items' in data:
             results.extend(data['items'])
-
-        start_index += 10  # Increment start index for next page
-
+        
         # Check if there are more results or if we've reached the desired number
         if "queries" in data and "nextPage" in data["queries"]:
             # Continue to the next page if available
@@ -201,7 +199,7 @@ start_date = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 query = "印度"
 
 # Fetch articles
-articles = fetch_articles(query, start_date, end_date, num_results=30)
+articles = fetch_articles(query, start_date, end_date, num_results=90)
 print(len(articles))
 
 # Publish to a webpage
