@@ -2,7 +2,7 @@ name: Daily News Update
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # Run daily at 08:00 UTC
+    - cron: '0 6 * * *'  # Run daily at 06:00 UTC
   push:
     branches:
       - main # Runs when the code is pushed to the main branch
