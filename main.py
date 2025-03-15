@@ -19,8 +19,8 @@ import time
 
 # Replace with your own credentials
 API_KEY = os.getenv('API_KEY')
-CSE_ID_Chinese = os.environ.get('CSE_ID_C')
-CSE_ID_English = os.environ.get('CSE_ID_E')
+CSE_ID_Chinese = os.getenv('CSE_ID_C')
+CSE_ID_English = os.getenv('CSE_ID_E')
 
 print("API_KEY:", API_KEY)
 print("CSE_ID_Chinese:", CSE_ID_Chinese)
@@ -53,7 +53,7 @@ def fetch_articles(query, start_date, end_date, num_results, cse_id):
 
         response = requests.get(url, params=params)
         print("Response Status Code:", response.status_code)
-        print("Response Content:", response.text)
+        #print("Response Content:", response.text)
         print(response)
 
         if response.status_code != 200:
