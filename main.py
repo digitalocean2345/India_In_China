@@ -25,6 +25,7 @@ CSE_ID_English = os.getenv('CSE_ID_E')
 
 print("API_KEY:", API_KEY)
 print("CSE_ID_Chinese:", CSE_ID_Chinese)
+print("CSE_ID_English:", CSE_ID_English)
 
 def publish_articles(articles):
     # Get current date
