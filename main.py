@@ -128,19 +128,19 @@ start_date = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 query_c = "印度"
 query_e = "india"
 # Fetch articles from Chinese sources
-articles_chinese = fetch_articles(query_c, start_date, end_date, num_results=90, CSE_ID_Chinese)
-print(f"number of articles fetched from Chinese sources: {len(articles)}")
+articles_chinese = fetch_articles(query_c, start_date, end_date, num_results=90, CSE_ID=CSE_ID_Chinese)
+print(f"number of articles fetched from Chinese sources: {len(articles_chinese)}")
 
 # Fetch articles from English sources
-articles_english = fetch_articles(query_e, start_date, end_date, num_results=30, CSE_ID_English)
-print(f"number of articles fetched from Chinese sources: {len(articles)}")
+articles_english = fetch_articles(query_e, start_date, end_date, num_results=30, CSE_ID=CSE_ID_English)
+print(f"number of articles fetched from Chinese sources: {len(articles_english)}")
 
 # Combine the results
 combined_articles = articles_chinese + articles_english
 print(f"total number of articles: {len(combined_articles)}")
 
 # Publish to a webpage
-publish_articles(articles)
+publish_articles(combined_articles)
 
 #Create the daily archive index
 
