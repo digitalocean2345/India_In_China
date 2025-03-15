@@ -19,10 +19,10 @@ import time
 
 # Replace with your own credentials
 API_KEY = os.getenv('API_KEY')
-CSE_ID = os.environ.get('CSE_ID')
-
+CSE_ID_Chinese = os.environ.get('CSE_ID_C')
+CSE_ID_English = os.environ.get('CSE_ID_E')
 # Function to fetch results from CSE API
-def fetch_articles(query, start_date, end_date, num_results):
+def fetch_articles(query, start_date, end_date, num_results, CSE_ID):
     url = "https://www.googleapis.com/customsearch/v1"
     results = []
     start_index = 1
@@ -125,11 +125,19 @@ end_date = datetime.today().strftime('%Y-%m-%d')
 start_date = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 
 # Search query to find India-related articles
-query = "印度"
+query_c = "印度"
+query_e = "india"
+# Fetch articles from Chinese sources
+articles_chinese = fetch_articles(query_c, start_date, end_date, num_results=90, CSE_ID_Chinese)
+print(f"number of articles fetched from Chinese sources: {len(articles)}")
 
-# Fetch articles
-articles = fetch_articles(query, start_date, end_date, num_results=90)
-print(f"number of articles fetched: {len(articles)}")
+# Fetch articles from English sources
+articles_english = fetch_articles(query_e, start_date, end_date, num_results=30, CSE_ID_English)
+print(f"number of articles fetched from Chinese sources: {len(articles)}")
+
+# Combine the results
+combined_articles = articles_chinese + articles_english
+print(f"total number of articles: {len(combined_articles)}")
 
 # Publish to a webpage
 publish_articles(articles)
