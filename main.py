@@ -21,8 +21,12 @@ import time
 API_KEY = os.getenv('API_KEY')
 CSE_ID_Chinese = os.environ.get('CSE_ID_C')
 CSE_ID_English = os.environ.get('CSE_ID_E')
+
+print("API_KEY:", API_KEY)
+print("CSE_ID_Chinese:", CSE_ID_Chinese)
+
 # Function to fetch results from CSE API
-def fetch_articles(query, start_date, end_date, num_results, CSE_ID):
+def fetch_articles(query, start_date, end_date, num_results, cse_id):
     url = "https://www.googleapis.com/customsearch/v1"
     results = []
     start_index = 1
@@ -34,7 +38,7 @@ def fetch_articles(query, start_date, end_date, num_results, CSE_ID):
     while len(results) < num_results:
         params = {
                 'key': API_KEY,
-                'cx': CSE_ID,
+                'cx': cse_id,
                 'q': query,
                 'start': start_index, # start with the first result,
                 'dateRestrict': date_range,  # Date range
@@ -42,9 +46,19 @@ def fetch_articles(query, start_date, end_date, num_results, CSE_ID):
                 'num': 10, # Number of results per page
             }
 
+        # Print the full URL for debugging
+        full_url = f"{url}?{'&'.join([f'{k}={v}' for k, v in params.items()])}"
+        print("Full URL:", full_url)
+
 
         response = requests.get(url, params=params)
+        print("Response Status Code:", response.status_code)
+        print("Response Content:", response.text)
         print(response)
+
+        if response.status_code != 200:
+            print("Error in API request. Check the parameters and try again.")
+            break
 
         # Check for 429 error
         if response.status_code == 429:
@@ -128,12 +142,12 @@ start_date = (datetime.today() - timedelta(days=1)).strftime('%Y-%m-%d')
 query_c = "印度"
 query_e = "india"
 # Fetch articles from Chinese sources
-articles_chinese = fetch_articles(query_c, start_date, end_date, num_results=90, CSE_ID=CSE_ID_Chinese)
+articles_chinese = fetch_articles(query_c, start_date, end_date, num_results=90, cse_id=CSE_ID_Chinese)
 print(f"number of articles fetched from Chinese sources: {len(articles_chinese)}")
 
 # Fetch articles from English sources
-articles_english = fetch_articles(query_e, start_date, end_date, num_results=30, CSE_ID=CSE_ID_English)
-print(f"number of articles fetched from Chinese sources: {len(articles_english)}")
+articles_english = fetch_articles(query_e, start_date, end_date, num_results=30, cse_id=CSE_ID_English)
+print(f"number of articles fetched from English sources: {len(articles_english)}")
 
 # Combine the results
 combined_articles = articles_chinese + articles_english
