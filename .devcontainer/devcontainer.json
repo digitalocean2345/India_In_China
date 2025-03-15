@@ -3,6 +3,8 @@
     "features": {},
     "containerEnv": {
       "API_KEY": "${API_KEY}",
-      "CSE_ID": "${CSE_ID}"
+      "CSE_ID": "${CSE_ID}",
+      "CSE_ID_C": "${localEnv:CSE_ID_C}",
+      "CSE_ID_E": "${localEnv:CSE_ID_E}"
     }
 }

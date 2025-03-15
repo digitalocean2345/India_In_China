@@ -2,7 +2,9 @@
   "name": "India_In_China",  //Change this to the name of your project
   "containerEnv": {
     "API_KEY": "${localEnv:API_KEY}",
-    "CSE_ID": "${localEnv:CSE_ID}"
+    "CSE_ID": "${localEnv:CSE_ID}",
+    "CSE_ID_C": "${localEnv:CSE_ID_C}",
+    "CSE_ID_E": "${localEnv:CSE_ID_E}"
   },
   "postCreateCommand": "pip install -r requirements.txt"
 }
