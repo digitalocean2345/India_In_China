@@ -40,7 +40,7 @@ def fetch_articles(query, start_date, end_date, num_results, key, cse_id):
         # Check for 429 error
         if response.status_code == 429:
             print("Rate limit exceeded. Waiting for 60 seconds...")
-            time.sleep(120)  # Wait for 60 seconds before retrying
+            time.sleep(60)  # Wait for 60 seconds before retrying
             continue  # Retry the same request
 
         data = response.json()
@@ -59,7 +59,7 @@ def fetch_articles(query, start_date, end_date, num_results, key, cse_id):
             break
 
         # Add a delay between requests to avoid hitting the rate limit
-        time.sleep(30)  # Wait for 2 seconds before the next request
+        time.sleep(2)  # Wait for 2 seconds before the next request
 
 
     print (f"length of results: {len(results)}")
